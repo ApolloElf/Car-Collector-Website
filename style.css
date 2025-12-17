@@ -8,7 +8,7 @@
 /* Body styling */
 body {
   font-family: Arial, Helvetica, sans-serif;
-  background-color: #f5f7fa;
+  background-color: #9BAEBF;
   color: #333;
   line-height: 1.6;
   padding: 20px;
@@ -56,7 +56,7 @@ section ul li {
 
 /* Buttons */
 button {
-  background-color: #1a73e8;
+  background-color: #5E728C;
   color: #fff;
   border: none;
   padding: 10px 18px;
@@ -66,5 +66,5 @@ button {
 }
 
 button:hover {
-  background-color: #155ab6;
+  background-color: #414f62;
 }

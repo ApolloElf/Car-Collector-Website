@@ -9,6 +9,73 @@
 <body>
     <h1>My Car Collection</h1>
     <p>Here you can view all your cars.</p>
-    
+    <div id="cars-container">
+        <div style="margin-bottom:12px;">
+            <button id="add-new" onclick="window.location.href='newcar.html'">Add New Car</button>
+            <button id="clear-all" style="margin-left:8px;">Clear All</button>
+        </div>
+        <div id="cars-list"></div>
+    </div>
+    <script>
+        (function(){
+            function loadCars(){
+                try{
+                    return JSON.parse(localStorage.getItem('cars')||'[]');
+                }catch(e){
+                    return [];
+                }
+            }
+            function saveCars(cars){
+                localStorage.setItem('cars', JSON.stringify(cars));
+            }
+            function render(){
+                const list = document.getElementById('cars-list');
+                const cars = loadCars();
+                list.innerHTML = '';
+                if(!cars || cars.length === 0){
+                    list.innerHTML = '<p>No cars yet. Add some from the New Car page.</p>';
+                    return;
+                }
+                cars.forEach(car => {
+                    const card = document.createElement('div');
+                    card.style.border = '1px solid #ddd';
+                    card.style.padding = '12px';
+                    card.style.marginBottom = '10px';
+                    card.style.borderRadius = '6px';
+                    const title = document.createElement('h3');
+                    title.textContent = car.make || 'Unnamed car';
+                    card.appendChild(title);
+                    const info = document.createElement('p');
+                    info.textContent = (car.year? ('Year: ' + car.year + ' | ') : '') + (car.color? ('Color: ' + car.color) : '');
+                    card.appendChild(info);
+                    if(car.image){
+                        const img = document.createElement('img');
+                        img.src = car.image;
+                        img.alt = car.make || '';
+                        img.style.maxWidth = '200px';
+                        img.style.display = 'block';
+                        img.style.marginBottom = '8px';
+                        card.appendChild(img);
+                    }
+                    const del = document.createElement('button');
+                    del.textContent = 'Delete';
+                    del.addEventListener('click', function(){
+                        const remaining = loadCars().filter(c => c.id !== car.id);
+                        saveCars(remaining);
+                        render();
+                    });
+                    card.appendChild(del);
+                    list.appendChild(card);
+                });
+            }
+            document.getElementById('clear-all').addEventListener('click', function(){
+                if(confirm('Clear all cars from your collection?')){
+                    localStorage.removeItem('cars');
+                    render();
+                }
+            });
+            render();
+        })();
+    </script>
 </body>
 </html>

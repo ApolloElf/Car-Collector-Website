@@ -9,15 +9,54 @@
 <body>
     <h1>Add a New Car to Your Collection</h1>
     <p>Fill in the details below to add a new car to your collection.</p>
-    <form>
+    <form id="new-car-form">
         <label for="car-make">Car Name:</label><br>
-        <input type="text" id="car-make" name="car-make"><br><br>
+        <input type="text" id="car-make" name="car-make" required><br><br>
         <label for="car-year">Year:</label><br>
         <input type="number" id="car-year" name="car-year"><br><br>
         <label for="car-color">Color:</label><br>
         <input type="text" id="car-color" name="car-color"><br><br>
+        <label for="car-image">Image URL (optional):</label><br>
+        <input type="url" id="car-image" name="car-image" placeholder="https://example.com/car.jpg"><br><br>
         <button type="submit">Add Car</button>
-        </form>
+    </form>
     <button type="button" onclick="window.location.href='mainpage.html'">Back to Mainpage</button>
+    <script>
+        (function(){
+            const form = document.getElementById('new-car-form');
+            function loadCars(){
+                try{
+                    return JSON.parse(localStorage.getItem('cars')||'[]');
+                }catch(e){
+                    return [];
+                }
+            }
+            function saveCars(cars){
+                localStorage.setItem('cars', JSON.stringify(cars));
+            }
+            form.addEventListener('submit', function(e){
+                e.preventDefault();
+                const make = document.getElementById('car-make').value.trim();
+                const year = document.getElementById('car-year').value.trim();
+                const color = document.getElementById('car-color').value.trim();
+                const image = document.getElementById('car-image').value.trim();
+                if(!make){
+                    alert('Please enter a car name.');
+                    return;
+                }
+                const cars = loadCars();
+                cars.push({
+                    id: Date.now(),
+                    make: make,
+                    year: year || null,
+                    color: color || null,
+                    image: image || null
+                });
+                saveCars(cars);
+                // redirect to collection page to view
+                window.location.href = 'mycarcollection.html';
+            });
+        })();
+    </script>
 </body>
 </html>

@@ -3,18 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mainpage</title>
+    <title>Cars Collector - Your Digital Car Collection</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Welcome to your personal car collection!</h1>
-    <p>A place for digital car fans.</p>
-    <p>- Show your cars to others.</p>
-    <p>- Compare stats and details.</p>
-    <p>- See clear info about your collection.</p>
-    <p>- Trade cars with people safely.</p>
-    <p>Car-Collercor makes it simple to enjoy, grow, and share your digital car collection.</p>
-    <button type="button" onclick="window.location.href='newcar.html'">Add New Car</button>
-    <button type="button" onclick="window.location.href='mycarcollection.html'">View My Cars</button>
+    <main class="container">
+        <h1>Welcome to Cars Collector</h1>
+        <p>Your personal digital car collection platform.</p>
+
+        <section>
+            <h2>Why collect with us?</h2>
+            <ul style="list-style: none; padding: 0;">
+                <li style="padding: 10px 0; color: #4a5568;">Show your cars to others</li>
+                <li style="padding: 10px 0; color: #4a5568;">Compare stats and details</li>
+                <li style="padding: 10px 0; color: #4a5568;">See clear info about your collection</li>
+                <li style="padding: 10px 0; color: #4a5568;">Manage your collection safely</li>
+            </ul>
+            <p style="margin-top: 20px; color: #718096; font-size: 0.95rem;">Cars Collector makes it simple to enjoy, grow, and share your digital car collection.</p>
+        </section>
+
+        <div class="button-group">
+            <button onclick="window.location.href='newcar.html'">Add New Car</button>
+            <button class="secondary" onclick="window.location.href='mycarcollection.html'">View My Cars</button>
+        </div>
+    </main>
 </body>
 </html>
